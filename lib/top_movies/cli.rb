@@ -7,6 +7,7 @@ class TopMovies::CLI
 
   def list_movies
     print_topmovies
+
   end
 
   def menu
@@ -21,10 +22,10 @@ class TopMovies::CLI
         print_movie(movie)
       elsif input == "list"
         list_movies
-        puts "ddddddddddddddddddddddddddddddddddddddd"
-      elseif input == "exit"
-        puts "dddddddddddddddddd"
+      elsif input == "exit"
+        puts ""
         goodbye
+        puts ""
       else
         puts 'Not sure what you want, type "list" to list movies again or type "exit" to quit.'
       end
