@@ -40,9 +40,10 @@ class TopMovies::Movies
 
   def self.movieinfo
    movie_profile ||= Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
+    
      tim_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btntim").attr("href").text}"
      puts tim_button
-     info_button ||= "https://wwww.cinemaclock.com#{movie_row.css("a.buttontoptab.btnrev").attr("href").text}"
+     info_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
      puts info_button
      rev_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
      puts rev_button
