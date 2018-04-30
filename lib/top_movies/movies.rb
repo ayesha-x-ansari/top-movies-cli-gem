@@ -39,41 +39,24 @@ class TopMovies::Movies
     
   end
   
-  
-
-  
   def profile_doc
     movie_profile = Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
   end
   
-  def starring_stars 
-    starring_array  = []
-    starring_doc   = profile_doc.css("div#actors1 div.aktor div.aktnam")
-    starring_doc.collect do |row|
-      starring_array  =   row.css("span.acname").text.strip   
-    end
-    #  starring = "#{starring_array.join("','")}"
-    #starring  =  starring_array
-  #  starring.gsub(/[[]"]/, '')
-  end
-  
   def time_url
-    tim_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btntim").attr("href").text}"
+    tim_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btntim").attr("href").text}"
   end
   
   def info_url
-    info_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
-  #  puts info_button
+    info_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btninf").attr("href").text}"
   end
   
   def review_url
-    rev_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
-   # puts rev_button
+    rev_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
   end
   
   def video_url
-    vid_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
-  #  puts vid_button
+    vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
   end
   
   
@@ -104,17 +87,14 @@ end
 
   def  get_desc
     #desc = profile_doc.css("#https\3a \2f \2f www\2e cinemaclock\2e com\2f movies\2f i-can-only-imagine-2018 > div:nth-child(5) > i").text
-
-   desc     = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/i").text
-    
+   desc     = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/i").text 
   end
-
 
   def  get_year
     scraper_doc     = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Year"  
-       return  year =  row.css("td.desc2").text 
+        return  year =  row.css("td.desc2").text 
       end
     end
   end
@@ -124,7 +104,7 @@ end
     scraper_doc     = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Genre"
-       return  genre =  row.css("td.desc2").text 
+        return  genre =  row.css("td.desc2").text 
       end
     end
   end
@@ -133,44 +113,18 @@ end
     scraper_doc     = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Directed by"  
-       return  year =  row.css("td.desc2").text 
+        return  directedby =  row.css("td.desc2").text 
       end
     end
   end
   
-  def movieinfo
-    url =  
-    movie_profile = Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
-
-    tim_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btntim").attr("href").text}"
-    puts tim_button
-    info_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
-    puts info_button
-    rev_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
-    puts rev_button
-    vid_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnvid").attr("href").text}"
-    puts vid_button
-
-    scraper_doc     = movie_profile.css("table.desc tr")
-    scraper_doc.each  do |row|
-      if row.css("td.desc1").text  == "Year"         ||
-        row.css("td.desc1").text  ==  "Genre"       ||
-        row.css("td.desc1").text  == "Directed by"  ||
-        row.css("td.desc1").text  == "Company"
-        desc =      row.css("td.desc1").text + ":  "   + row.css("td.desc2").text
-        puts desc
-        puts "11"
-      end
-       #  desc =     row.css("td.desc2").text
-       # puts row
-      end
-
-    starring =  nil
-    starring_doc   = movie_profile.css("div#actors1 div.aktor div.aktnam")
-    starring_doc.each do |row|
-      actor_name = row.css("span.acname").text.strip  +  ","
-      starring  =    starring + " " +  actor_name
-      puts starring
+  def get_starring 
+    starring_array  = []
+    starring_doc   = profile_doc.css("div#actors1 div.aktor div.aktnam")
+    starring_doc.collect do |row|
+      starring_array  =   row.css("span.acname").text.strip   
     end
+    starring = starring_array.join(", ")
   end
+
 end
