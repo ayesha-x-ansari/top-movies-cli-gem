@@ -4,13 +4,13 @@ class TopMovies::Movies
   #class UpcomingMovies::Movies
 
   attr_accessor :title, :url, :genre_index, :timeurl, :infourl, :reviewurl, :videosurl, :ratings, :year, :genre,
-  :directedby, :compaany, :desc, :starring
+  :directedby, :company, :desc, :starring
   @@all = []
 
   def self.new_from_index_page(movie_row)
     self.new(
     @title =  movie_row.css("h3.movietitle  a").text.strip,
-  # @url =  "https://wwww.cinemaclock.com#{movie_row.css("h3.movietitle a").attribute("href").text}",
+   # @url =  "https://wwww.cinemaclock.com#{movie_row.css("h3.movietitle a").attribute("href").text}",
     @url =  movie_row.css("h3.movietitle a").text,
     @genre_index  =  movie_row.css("p.moviegenre").text.strip
 
@@ -36,18 +36,57 @@ class TopMovies::Movies
 
   def self.find(id)
     self.all[id-1]
+    
+  end
+  
+  
+
+  
+  def profile_doc
+    movie_profile = Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
+  end
+  
+  def starring_stars 
+    starring_doc   = profile_doc.css("div#actors1 div.aktor div.aktnam")
+    starring_doc.collect do |row|
+      starring  = row.css("span.acname").text.strip
+      puts starring 
+    end  
+    starring
+  end
+  
+  def time_url
+    tim_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btntim").attr("href").text}"
+  end
+  
+  def info_url
+    info_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
+  #  puts info_button
+  end
+  
+  def review_url
+    rev_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
+   # puts rev_button
+  end
+  
+  def video_url
+    vid_button ||= "https://wwww.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
+  #  puts vid_button
   end
 
+  
+  
   def movieinfo
-    movie_profile ||= Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
+    url =  
+    movie_profile = Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
 
-    tim_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btntim").attr("href").text}"
+    tim_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btntim").attr("href").text}"
     puts tim_button
-    info_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
+    info_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
     puts info_button
-    rev_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
+    rev_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnrev").attr("href").text}"
     puts rev_button
-    vid_button ||= "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnvid").attr("href").text}"
+    vid_button = "https://wwww.cinemaclock.com#{movie_profile.css("a.buttontoptab.btnvid").attr("href").text}"
     puts vid_button
 
     scraper_doc     = movie_profile.css("table.desc tr")
@@ -64,7 +103,7 @@ class TopMovies::Movies
        # puts row
       end
 
-    starring ||=  nil
+    starring =  nil
     starring_doc   = movie_profile.css("div#actors1 div.aktor div.aktnam")
     starring_doc.each do |row|
       actor_name = row.css("span.acname").text.strip  +  ","

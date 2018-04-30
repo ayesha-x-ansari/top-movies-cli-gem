@@ -34,7 +34,7 @@ class TopMovies::CLI
 
   def print_topmovies
     puts ""
-    puts "---------------------------#{TopMovies::Movies.all.size} Top Movies ---------------------------"
+    puts "---------------------------#{TopMovies::Movies.all.size - 1} Top Movies ---------------------------"
     puts ""
 
     TopMovies::Movies.all.each.with_index(1) do |movies, index|
@@ -50,10 +50,10 @@ class TopMovies::CLI
     puts ""
     puts "----------------------------------------#{movie.title} ------------------------------------"
     puts ""
-    puts "Time:             #{movie.timeurl}"
-    puts "Info:             #{movie.infourl}"
-    puts "Review:           #{movie.reviewurl}"
-    puts "Videos:           #{movie.videosurl}"
+    puts "Time:             #{movie.time_url}"
+    puts "Info:             #{movie.info_url}"
+    puts "Review:           #{movie.review_url}"
+    puts "Videos:           #{movie.video_url}"
     puts "Ratings:          #{movie.ratings}"
     puts "Year:             #{movie.year}"
     puts "Genre:            #{movie.genre}"
@@ -65,7 +65,7 @@ class TopMovies::CLI
     puts ""
     puts "----------------------------------------S T A R R I N G----------------------------------------"
     puts "                                         "
-    puts "Starring:              #{movie.starring}"
+    puts "Starring:              #{movie.starring_stars}"
     puts "                                         "
   end
 
