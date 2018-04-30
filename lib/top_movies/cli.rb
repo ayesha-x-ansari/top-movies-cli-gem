@@ -8,7 +8,7 @@ class TopMovies::CLI
 
   def list_movies
     puts "----------------------------------------------------------------------------"
-    puts "                            #{Movies.all.size} Top Movies"
+    puts "                      #{TopMovies::Movies.all.size} Top Movies"
     puts "----------------------------------------------------------------------------"
     print_topmovies
   end
@@ -21,6 +21,7 @@ class TopMovies::CLI
 
       if input.to_i > 0
         movie = TopMovies::Movies.find(input.to_i)
+        print_topmovies
       elsif input == "list"
         list_movies
       else
@@ -45,7 +46,7 @@ class TopMovies::CLI
   end
   def print_a_movie(movie)
     puts ""
-    puts "----------------------------------------#{movies.title} ------------------------------------"
+    puts "----------------------------------------#{movie.title} ------------------------------------"
     puts ""
     puts "Time:             #{movie.timeurl}"
     puts "Info:             #{movie.infourl}"
