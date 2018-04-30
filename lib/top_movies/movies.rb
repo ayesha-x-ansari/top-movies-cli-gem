@@ -71,7 +71,7 @@ class TopMovies::Movies
         starring_doc   = movie_profile.css("div#actors1 div.aktor div.aktnam")
         starring_doc.each do |row|
           actor_name = row.css("span.acname").text.strip  +  ","
-          starring  =    starring + " " +  actor_name
+          starring  =    "#{starring  actor_name}"
           puts starring
         end
     end
