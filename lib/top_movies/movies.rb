@@ -74,7 +74,14 @@ class TopMovies::Movies
   #  puts vid_button
   end
 
-  
+  def  get_year
+    scraper_doc     = profile_doc.css("table.desc tr")
+    scraper_doc.detect  do |row|
+      if row.css("td.desc1").text  == "Year"  
+        year =  row.css("td.desc2").text
+      end
+    end
+  end
   
   def movieinfo
     url =  

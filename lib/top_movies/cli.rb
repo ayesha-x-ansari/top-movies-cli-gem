@@ -55,7 +55,7 @@ class TopMovies::CLI
     puts "Review:           #{movie.review_url}"
     puts "Videos:           #{movie.video_url}"
     puts "Ratings:          #{movie.ratings}"
-    puts "Year:             #{movie.year}"
+    puts "Year:             #{movie.get_year}"
     puts "Genre:            #{movie.genre}"
     puts "Directed By:      #{movie.directedby}"
     puts "Company:          #{movie.company}"
