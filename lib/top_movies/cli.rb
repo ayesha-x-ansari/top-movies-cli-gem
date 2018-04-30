@@ -3,36 +3,37 @@ class TopMovies::CLI
     TopMovies::Scraper.new.make_comingsoon_movies
     list_movies
     menu
-    goodbye
   end
 
   def list_movies
-    puts "----------------------------------------------------------------------------"
-    puts "                      #{TopMovies::Movies.all.size} Top Movies"
-    puts "----------------------------------------------------------------------------"
     print_topmovies
   end
 
   def menu
+    puts 'Enter the number of movie you want more information on or type "exit" to quit.' 
     input = nil
     while input != "exit"
-      puts "Enter the number of movie you want more information on or type type exit to quit: "
       input = gets.strip.downcase
 
       if input.to_i > 0
         movie = TopMovies::Movies.find(input.to_i)
-        print_topmovies
+        puts movie
+        print_movie(movie)
       elsif input == "list"
         list_movies
+        puts "ddddddddddddddddddddddddddddddddddddddd"
+      elseif input == "exit"
+        puts "dddddddddddddddddd"
+        goodbye
       else
-        puts " Not sure what ypu want type list to list movies again or type exit to quit"
+        puts 'Not sure what you want, type "list" to list movies again or type "exit" to quit.'
       end
     end
   end
 
   def print_topmovies
     puts ""
-    puts "---------------------------Top Movies ---------------------------"
+    puts "---------------------------#{TopMovies::Movies.all.size} Top Movies ---------------------------"
     puts ""
 
     TopMovies::Movies.all.each.with_index(1) do |movies, index|
@@ -44,7 +45,7 @@ class TopMovies::CLI
       end
     end
   end
-  def print_a_movie(movie)
+  def print_movie(movie)
     puts ""
     puts "----------------------------------------#{movie.title} ------------------------------------"
     puts ""
