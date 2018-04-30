@@ -1,7 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
 class TopMovies::Movies
-  #class UpcomingMovies::Movies
 
   attr_accessor :title, :url, :genre_index, :timeurl, :infourl, :reviewurl, :videosurl, :rating, :year, :genre,
   :directedby, :company, :desc, :starring
@@ -10,7 +9,7 @@ class TopMovies::Movies
   def self.new_from_index_page(movie_row)
     self.new(
     @title =  movie_row.css("h3.movietitle  a").text.strip,
-   # @url =  "https://wwww.cinemaclock.com#{movie_row.css("h3.movietitle a").attribute("href").text}",
+   # @url =  "https://www.cinemaclock.com#{movie_row.css("h3.movietitle a").attribute("href").text}",
     @url =  movie_row.css("h3.movietitle a").text,
     @genre_index  =  movie_row.css("p.moviegenre").text.strip
 
