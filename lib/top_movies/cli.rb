@@ -1,39 +1,30 @@
 class TopMovies::CLI
   def call
-    puts "Upconing Movies"
-  #  UpcomingMovies::Scraper.new.make_comingsoon_movies
     TopMovies::Scraper.new.make_comingsoon_movies
     list_movies
     menu
-    "checking menu"
     goodbye
   end
 
   def list_movies
-    puts "Listed Below Are Upcming Movies"
+    puts "----------------------------------------------------------------------------"
+    puts "                            #{Movies.all.size} Top Movies"
+    puts "----------------------------------------------------------------------------"
     print_topmovies
-    #@movies  =  UpcomingMovies::Movies.today
-    #@movies.each.with_index(1)   do |movies, i|
-    #  puts "#{i},. #{movies.name} - #{movies.price} #{movies.url}"
-    #end
   end
 
   def menu
-    puts "Enter the number of movie you want more information on or type exit to "
     input = nil
     while input != "exit"
-      puts "enter the number of movie you want to find more detail on."
+      puts "Enter the number of movie you want more information on or type type exit to quit: "
       input = gets.strip.downcase
 
       if input.to_i > 0
-        # the_movies =  @movies[input.to_i - 1 ]
-        # puts "#{the_movies.name} - #{the_movies.price} #{the_movies.url}"
-        TopMovies::Movies.movieinfo
-
+        movie = TopMovies::Movies.find(input.to_i)
       elsif input == "list"
         list_movies
       else
-          puts " Not sure what ypu want type list or exit"
+        puts " Not sure what ypu want type list to list movies again or type exit to quit"
       end
     end
   end
@@ -52,31 +43,31 @@ class TopMovies::CLI
       end
     end
   end
-  def print_restaurant(movies)
+  def print_a_movie(movie)
     puts ""
     puts "----------------------------------------#{movies.title} ------------------------------------"
     puts ""
-    puts "Time:             #{movies.timeurl}"
-    puts "Info:             #{movies.infourl}"
-    puts "Review:           #{movies.reviewurl}"
-    puts "Videos:           #{movies.videosurl}"
-    puts "Ratings:          #{movies.ratings}"
-    puts "Year:             #{movies.year}"
+    puts "Time:             #{movie.timeurl}"
+    puts "Info:             #{movie.infourl}"
+    puts "Review:           #{movie.reviewurl}"
+    puts "Videos:           #{movie.videosurl}"
+    puts "Ratings:          #{movie.ratings}"
+    puts "Year:             #{movie.year}"
     puts "Genre:            #{movie.genre}"
-    puts "Directed By:      #{movies.directedby}"
+    puts "Directed By:      #{movie.directedby}"
     puts "Company:          #{movie.company}"
     puts "-------------------------------------D E S C R I P T I O N-----------------------------------"
     puts ""
-    puts "#{movies.desc}"
+    puts "#{movie.desc}"
     puts ""
     puts "----------------------------------------S T A R R I N G----------------------------------------"
     puts "                                         "
-    puts "Starring:              #{movies.starring}"
+    puts "Starring:              #{movie.starring}"
     puts "                                         "
   end
 
 
   def goodbye
-    puts "see you again bye"
+    puts "Have a nice day. See you again Good Bye"
   end
 end
