@@ -47,12 +47,14 @@ class TopMovies::Movies
   end
   
   def starring_stars 
+    starring_array  = []
     starring_doc   = profile_doc.css("div#actors1 div.aktor div.aktnam")
     starring_doc.collect do |row|
-      starring  = row.css("span.acname").text.strip
-      puts starring 
-    end  
-    starring
+      starring_array  =   row.css("span.acname").text.strip   
+    end
+    #  starring = "#{starring_array.join("','")}"
+    #starring  =  starring_array
+  #  starring.gsub(/[[]"]/, '')
   end
   
   def time_url
@@ -76,9 +78,19 @@ class TopMovies::Movies
 
   def  get_year
     scraper_doc     = profile_doc.css("table.desc tr")
-    scraper_doc.detect  do |row|
+    scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Year"  
-        year =  row.css("td.desc2").text
+       return  year =  row.css("td.desc2").text 
+      end
+    end
+  end
+  
+  
+  def get_genre
+    scraper_doc     = profile_doc.css("table.desc tr")
+    scraper_doc.collect  do |row|
+      if row.css("td.desc1").text  == "genre"
+       return  genre =  row.css("td.desc2").text 
       end
     end
   end
