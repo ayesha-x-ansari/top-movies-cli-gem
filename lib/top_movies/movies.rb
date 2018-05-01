@@ -2,31 +2,30 @@ require 'nokogiri'
 require 'open-uri'
 class TopMovies::Movies
 
-  attr_accessor :title, :url, :genre_index, :timeurl, :infourl, :reviewurl, :videosurl, :rating, :year, :genre,
+  attr_accessor :title, :url, :timeurl, :infourl, :reviewurl, :videosurl, :rating, :year, :genre,
   :directedby, :company, :desc, :starring
   @@all = []
 
   def self.new_from_index_page(movie_row)
-    self.new(
-    @title =  movie_row.css("h3.movietitle  a").text.strip,
-   # @url =  "https://www.cinemaclock.com#{movie_row.css("h3.movietitle a").attribute("href").text}",
-    @url =  movie_row.css("h3.movietitle a").text,
-    @genre_index  =  movie_row.css("p.moviegenre").text.strip
+   self.new(
+   @title =   movie_row.css("h3.movietitle a").text.strip,
+   #url  "https://www.cinemaclock.com#{movie_row.css("h3.movietitle a").attr("href").text}"  
+   @url =  movie_row.css("h3.movietitle a").text
 
   )
+   @url = "https://www.cinemaclock.com#{@url}"
+   puts " url   #{@url}"
 
   end
 
   def initialize(title=nil, url=nil, genre_index=nil )
     @title     =   title
     @url       =   url
-    @genre_index     =   genre_index
 
     self.class.all << self
 
     puts "title: #{title}"
     puts url
-    puts "genre11111111S #{genre_index}"
   end
 
   def self.all
@@ -123,7 +122,7 @@ end
     starring_doc.collect do |row|
       starring_array  =   row.css("span.acname").text.strip   
     end
-    starring = starring_array.join(", ")
+  
   end
 
 end

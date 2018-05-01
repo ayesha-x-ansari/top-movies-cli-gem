@@ -56,7 +56,7 @@ class TopMovies::CLI
     puts "Videos:           #{movie.video_url}"
     puts "Ratings:          #{movie.get_rating}"
     puts "Year:             #{movie.get_year}"
-    puts "Genre:            #{movie.genre}"
+    puts "Genre:            #{movie.get_genre}"
     puts "Directed By:      #{movie.get_directedby}"
     puts "Company:          #{movie.get_company}"
     puts "-------------------------------------D E S C R I P T I O N-----------------------------------"
@@ -65,7 +65,7 @@ class TopMovies::CLI
     puts ""
     puts "----------------------------------------S T A R R I N G----------------------------------------"
     puts "                                         "
-    puts "Starring:              #{movie.starring_stars}"
+    puts "Starring:              #{movie.get_starring}"
     puts "                                         "
   end
 
