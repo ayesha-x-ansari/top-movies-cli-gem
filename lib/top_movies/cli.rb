@@ -65,9 +65,9 @@ class TopMovies::CLI
     puts " "                                                                                             
     puts "Starring:              #{movie.get_starring}"
     puts " "
-    purs "------------------------------------------------------------------------------------------------"
+    puts "------------------------------------------------------------------------------------------------"
     puts " "
-    put  'Please type "list" to list movies again or type "exit" to quit.'
+    puts  'Please type "list" to list movies again or type "exit" to quit.'
   end
 
 
