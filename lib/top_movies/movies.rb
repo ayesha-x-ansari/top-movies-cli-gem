@@ -7,15 +7,10 @@ class TopMovies::Movies
   @@all = []
 
   def self.new_from_index_page(movie_row)
-   self.new(
-   @title =   movie_row.css("h3.movietitle a").text.strip,
-   #url  "https://www.cinemaclock.com#{movie_row.css("h3.movietitle a").attr("href").text}"  
-   @url =  movie_row.css("h3.movietitle a").text
-
-  )
-   @url = "https://www.cinemaclock.com#{@url}"
-   puts " url   #{@url}"
-
+    self.new(
+    @title =   movie_row.css("div.smallposter.shrink img.lazy").attr("alt").text.strip,
+    @url =  "https://www.cinemaclock.com#{movie_row.css("h3.movietitle a").attr("href").text}"  
+    )
   end
 
   def initialize(title=nil, url=nil, genre_index=nil )
@@ -24,8 +19,6 @@ class TopMovies::Movies
 
     self.class.all << self
 
-    puts "title: #{title}"
-    puts url
   end
 
   def self.all
@@ -34,7 +27,6 @@ class TopMovies::Movies
 
   def self.find(id)
     self.all[id-1]
-    
   end
   
   def profile_doc
@@ -42,28 +34,26 @@ class TopMovies::Movies
   end
   
   def time_url
-    tim_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btntim").attr("href").text}"
+    @tim_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btntim").attr("href").text}"
   end
   
   def info_url
-    info_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btninf").attr("href").text}"
+    @info_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btninf").attr("href").text}"
   end
   
   def review_url
-    rev_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
+    @rev_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnrev").attr("href").text}"
   end
   
   def video_url
-    vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
+    @vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
   end
-  
   
   def  get_rating
         rating    = profile_doc.css("#ratingmpaa > td.desc2 > div > div > span").text
    #    rating    = profile_doc.xpath("//*[@id='ratingmpaa']/td[2]/div/div/span").text
   end
   
-      
   def  get_year
    # year    = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/div/i/table/tbody/tr[9]/td[2]").text
   end
@@ -116,13 +106,12 @@ end
     end
   end
   
-  def get_starring 
-    starring_array  = []
+  def get_starring
     starring_doc   = profile_doc.css("div#actors1 div.aktor div.aktnam")
-    starring_doc.collect do |row|
-      starring_array  =   row.css("span.acname").text.strip   
+    starring_array =   starring_doc.collect do |row|
+      row.css("span.acname").text.strip
     end
-  
+    starring_array.compact.reject(&:empty?).join(', ')
   end
 
 end
