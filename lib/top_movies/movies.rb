@@ -18,7 +18,6 @@ class TopMovies::Movies
     @url       =   url
 
     self.class.all << self
-
   end
 
   def self.all
@@ -46,7 +45,11 @@ class TopMovies::Movies
   end
   
   def video_url
-    @vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
+    if  profile_doc.css("a.buttontoptab.btnvid.disabled")
+      @vid_button  = " "
+    else
+      @vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
+    end
   end
   
   def  get_rating
@@ -54,12 +57,12 @@ class TopMovies::Movies
   end
   
   def  get_year
-  #  scraper_doc = profile_doc.css("table.desc tr")
-  #  scraper_doc.collect  do |row|
-  #    if row.css("td.desc1").text  == "Year"  
-  #      return  @year =  row.css("td.desc2").text 
-  #    end
-  #  end
+    scraper_doc = profile_doc.css("table.desc tr")
+    scraper_doc.collect  do |row|
+      if row.css("td.desc1").text  == "Year"  
+        return  @year =  row.css("td.desc2").text 
+      end
+    end
   end
   
   def get_genre
