@@ -87,7 +87,7 @@ class TopMovies::Movies
     @company = profile_doc.xpath("//*[@id='companycan']").text
   end
 
-  ddef  get_desc
+  def  get_desc
     @desc = profile_doc.css("div:nth-child(5) > i").text 
   end
   

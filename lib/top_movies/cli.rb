@@ -34,16 +34,14 @@ class TopMovies::CLI
 
   def print_topmovies
     puts ""
-    puts "---------------------------#{TopMovies::Movies.all.size - 1} Top Movies ---------------------------"
+    puts "---------------------------#{TopMovies::Movies.all.size} Top Movies ---------------------------"
     puts ""
 
     TopMovies::Movies.all.each.with_index(1) do |movies, index|
-      if movies.title !=  ""
-        if index < 10
-          index = "0#{index}"
-        end
-        puts "#{index}.  #{movies.title}"
+      if index < 10
+        index = "0#{index}"
       end
+        puts "#{index}.  #{movies.title}"
     end
   end
   def print_movie(movie)
@@ -64,9 +62,12 @@ class TopMovies::CLI
     puts "#{movie.get_desc}"
     puts ""
     puts "----------------------------------------S T A R R I N G----------------------------------------"
-    puts "                                         "
+    puts " "                                                                                             
     puts "Starring:              #{movie.get_starring}"
-    puts "                                         "
+    puts " "
+    purs "------------------------------------------------------------------------------------------------"
+    puts " "
+    put  'Please type "list" to list movies again or type "exit" to quit.'
   end
 
 
