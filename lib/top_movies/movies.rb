@@ -30,7 +30,7 @@ class TopMovies::Movies
   end
   
   def profile_doc
-    movie_profile = Nokogiri::HTML(open("https://www.cinemaclock.com/movies/i-can-only-imagine-2018"))
+    @movie_profile = Nokogiri::HTML(open(self.url))
   end
   
   def time_url
@@ -54,12 +54,12 @@ class TopMovies::Movies
   end
   
   def  get_year
-    scraper_doc = profile_doc.css("table.desc tr")
-    scraper_doc.collect  do |row|
-      if row.css("td.desc1").text  == "Year"  
-        return  @year =  row.css("td.desc2").text 
-      end
-    end
+  #  scraper_doc = profile_doc.css("table.desc tr")
+  #  scraper_doc.collect  do |row|
+  #    if row.css("td.desc1").text  == "Year"  
+  #      return  @year =  row.css("td.desc2").text 
+  #    end
+  #  end
   end
   
   def get_genre
