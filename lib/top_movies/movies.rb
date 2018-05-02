@@ -50,49 +50,23 @@ class TopMovies::Movies
   end
   
   def  get_rating
-        rating    = profile_doc.css("#ratingmpaa > td.desc2 > div > div > span").text
-   #    rating    = profile_doc.xpath("//*[@id='ratingmpaa']/td[2]/div/div/span").text
+    rating    = profile_doc.css("#ratingmpaa > td.desc2 > div > div > span").text
   end
   
   def  get_year
-   # year    = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/div/i/table/tbody/tr[9]/td[2]").text
-  end
-     
-  def  get_genre
-  #genre       = profile_doc.css("#https\3a \2f \2f www\2e cinemaclock\2e com\2f movies\2f i-can-only-imagine-2018 > div:nth-child(5) > div > i > table > tbody > tr:nth-child(12) > td.desc2 > span").text
-   # genre       = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/div/i/table/tbody/tr[11]/td[2]/span").text
-  end
- 
-  def get_directedby
-  #  directedby       = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/div/i/table/tbody/tr[12]/td[2]/span/span").text
-end
-
-  def get_company
-   #company       = profile_doc.css("#companyus").text
-  company       = profile_doc.xpath("//*[@id='companycan']").text
-  
-  end
-
-  def  get_desc
-    #desc = profile_doc.css("#https\3a \2f \2f www\2e cinemaclock\2e com\2f movies\2f i-can-only-imagine-2018 > div:nth-child(5) > i").text
-   desc     = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/i").text 
-  end
-
-  def  get_year
-    scraper_doc     = profile_doc.css("table.desc tr")
+    scraper_doc = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Year"  
-        return  year =  row.css("td.desc2").text 
+        return  @year =  row.css("td.desc2").text 
       end
     end
   end
   
-  
   def get_genre
-    scraper_doc     = profile_doc.css("table.desc tr")
+    scraper_doc = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Genre"
-        return  genre =  row.css("td.desc2").text 
+        return  @genre =  row.css("td.desc2").text 
       end
     end
   end
@@ -101,9 +75,17 @@ end
     scraper_doc     = profile_doc.css("table.desc tr")
     scraper_doc.collect  do |row|
       if row.css("td.desc1").text  == "Directed by"  
-        return  directedby =  row.css("td.desc2").text 
+        return  @directedby =  row.css("td.desc2").text 
       end
     end
+  end
+  
+  def get_company
+    @company = profile_doc.xpath("//*[@id='companycan']").text
+  end
+
+  def  get_desc
+    @desc = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/i").text 
   end
   
   def get_starring
