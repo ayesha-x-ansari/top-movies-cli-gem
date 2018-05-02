@@ -87,8 +87,8 @@ class TopMovies::Movies
     @company = profile_doc.xpath("//*[@id='companycan']").text
   end
 
-  def  get_desc
-    @desc = profile_doc.xpath("//*[@id='https://www.cinemaclock.com/movies/i-can-only-imagine-2018']/div[2]/i").text 
+  ddef  get_desc
+    @desc = profile_doc.css("div:nth-child(5) > i").text 
   end
   
   def get_starring
