@@ -1,8 +1,3 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
-#class UpcomingMovies::Scraper
 class TopMovies::Scraper
 
   def get_page
@@ -10,11 +5,11 @@ class TopMovies::Scraper
   end       
 
   def scrape_comingsoon_movies
-      get_page.css("#CT div.BD .movieblock")
+      get_page.css("div#CT div.BD div.movieblock")
   end
 
   def make_comingsoon_movies
-    scrape_comingsoon_movies.css(".movieblock").each do |movie_row|
+    scrape_comingsoon_movies.css("div.movieblock.efilm").each do |movie_row|
        TopMovies::Movies.new_from_index_page(movie_row)
     end
   end
