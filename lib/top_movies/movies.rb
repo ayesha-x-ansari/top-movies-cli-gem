@@ -1,5 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
 class TopMovies::Movies
 
   attr_accessor :title, :url, :timeurl, :infourl, :reviewurl, :videosurl, :rating, :year, :genre,
