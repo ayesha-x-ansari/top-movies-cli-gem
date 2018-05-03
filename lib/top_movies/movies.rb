@@ -45,11 +45,7 @@ class TopMovies::Movies
   end
   
   def video_url
-    if  profile_doc.css("a.buttontoptab.btnvid.disabled")
-      @vid_button  = " "
-    else
       @vid_button ||= "https://www.cinemaclock.com#{profile_doc.css("a.buttontoptab.btnvid").attr("href").text}"
-    end
   end
   
   def  get_rating
