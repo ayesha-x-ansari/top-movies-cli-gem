@@ -10,7 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = "ayesha.x.ansari@gmail.com"
 
   spec.summary       = "Top Movies"
-  spec.description   = "List Top Movies provide details related to the top movieselected"
+  spec.description   = "List Top Movies provide details related to the top movie selected"
+  # Tried to install gem and then push didnt work will try again
   spec.homepage      = "http://rubygems.org/gems/top_movies"
   spec.license       = "MIT"
   spec.files         = ["lib/top_movies.rb", "lib/top_movies/cli.rb", "lib/top_movies/scraper.rb", "lib/top_movies/movies.rb"]
