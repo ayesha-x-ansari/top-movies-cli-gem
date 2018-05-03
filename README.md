@@ -1,3 +1,6 @@
+Description
+This CLI displays to user list of movies from https://www.cinemaclock.com/movies/top-10 site and than user selects a movie the selected movie's information is than displayed to the user; the information includes link for time, reviews, information, videos also it provides movie rating, year released, run time, genre, directed by and the name of the company that released the movie also a briefdescription of movie.
+
 Installation
 You can install this gem via 
     gem install top_movies-cli-gem
