@@ -11,15 +11,17 @@ class TopMovies::CLI
   end
 
   def menu
-    puts 'Enter the number of movie you want more information on or type "exit" to quit.' 
+    puts "Enter the number of movie from 1 to #{TopMovies::Movies.all.size} you want more information on or" +  ' type "exit" to quit.' 
     input = nil
     while input != "exit"
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0  && input.to_i  <=  TopMovies::Movies.all.size 
         movie = TopMovies::Movies.find(input.to_i)
-        puts movie
         print_movie(movie)
+      elsif input.to_i  >  TopMovies::Movies.all.size
+        puts "You entered #{input.to_i}."       
+        puts "Enter the number of movie from 1 to #{TopMovies::Movies.all.size} you want more information on or" +  ' type "list" to list movies or  "exit" to quit.'
       elsif input == "list"
         list_movies
       elsif input == "exit"
