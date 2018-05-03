@@ -20,7 +20,7 @@ class TopMovies::CLI
         movie = TopMovies::Movies.find(input.to_i)
         print_movie(movie)
       elsif input.to_i  >  TopMovies::Movies.all.size
-        puts "You entered #{input.to_i}."       
+        puts "You entered number #{input.to_i}."       
         puts "Enter the number of movie from 1 to #{TopMovies::Movies.all.size} you want more information on or" +  ' type "list" to list movies or  "exit" to quit.'
       elsif input == "list"
         list_movies
@@ -29,7 +29,7 @@ class TopMovies::CLI
         goodbye
         puts ""
       else
-        puts 'Not sure what you want, type "list" to list movies again or type "exit" to quit.'
+        puts "Not sure what you want, enter the number of movie from 1 to #{TopMovies::Movies.all.size} you want more information on or" +  ' type "list" to list movies or  "exit" to quit.'
       end
     end
   end
@@ -69,7 +69,7 @@ class TopMovies::CLI
     puts " "
     puts "------------------------------------------------------------------------------------------------"
     puts " "
-    puts  'Please type "list" to list movies again or type "exit" to quit.'
+    puts "Enter the number of movie from 1 to #{TopMovies::Movies.all.size} you want more information on or" +  ' type "list" to list movies or  "exit" to quit.'
   end
 
 
