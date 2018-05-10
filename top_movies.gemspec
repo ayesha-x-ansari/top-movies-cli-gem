@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Top Movies"
   spec.description   = "List Top Movies provide details related to the top movie selected"
-  # Tried to install gem and then push didnt work will try again
-  spec.homepage      = "http://rubygems.org/gems/top_movies"
+ 
+  spec.homepage      = "https://rubygems.org/gems/top_movies_of_the_year"
   spec.license       = "MIT"
   spec.files         = ["lib/top_movies.rb", "lib/top_movies/cli.rb", "lib/top_movies/scraper.rb", "lib/top_movies/movies.rb"]
  # spec.bindir        = "exe"
